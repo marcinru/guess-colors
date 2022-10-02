@@ -17,12 +17,20 @@ function App() {
     setAnswers([actualColor, getRandomColor(), getRandomColor()].sort(() => 0.5 - Math.random()));
   }, []);
 
+  function handleAnswerClicked(answer: string) {
+    if (answer === color) {
+      // TODO: guessed correct answer
+    } else {
+      // TODO: guessed wrong answer
+    }
+  }
+
   return (
     <div className="App">
       <div>
         <div className="guess-me" style={{ background: color }}></div>
         {answers.map(answer => (
-          <button key={answer}>{answer}</button>
+          <button key={answer} onClick={() => handleAnswerClicked(answer)}>{answer}</button>
         ))}
       </div>
     </div>
