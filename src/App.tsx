@@ -7,10 +7,15 @@ const getRandomColor = () => {
   return `#${color}`;
 }
 
+enum Result {
+  Correct,
+  Wrong
+}
+
 function App() {
   const [color, setColor] = useState('');
   const [answers, setAnswers] = useState<string[]>([]);
-  const [result, setResult] = useState<boolean | undefined>(undefined);
+  const [result, setResult] = useState<Result | undefined>(undefined);
 
   const generateColors = () => {
     getRandomColor();
@@ -25,10 +30,10 @@ function App() {
 
   const handleAnswerClicked = (answer: string) => {
     if (answer === color) {
-      setResult(true);
+      setResult(Result.Correct);
       generateColors();
     } else {
-      setResult(false);
+      setResult(Result.Wrong);
     }
   }
 
@@ -39,8 +44,8 @@ function App() {
         {answers.map(answer => (
           <button key={answer} onClick={() => handleAnswerClicked(answer)}>{answer}</button>
         ))}
-        {result === false && <div className="wrong answer">Wrong Answer</div>}
-        {result === true && <div className="correct answer">Correct!</div>}
+        {result === Result.Wrong && <div className="wrong answer">Wrong Answer</div>}
+        {result === Result.Correct && <div className="correct answer">Correct!</div>}
       </div>
     </div>
   );
