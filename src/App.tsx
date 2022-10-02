@@ -4,6 +4,7 @@ import './App.css';
 function App() {
   const [color, setColor] = useState('');
   const [answers, setAnswers] = useState<string[]>([]);
+  const [isWrongSelection, setIsWrongSelection] = useState<boolean>(false);
 
   const getRandomColor = () => {
     const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
@@ -19,9 +20,10 @@ function App() {
 
   function handleAnswerClicked(answer: string) {
     if (answer === color) {
-      // TODO: guessed correct answer
+      setIsWrongSelection(false);
+      // TODO: reselect colors
     } else {
-      // TODO: guessed wrong answer
+      setIsWrongSelection(true);
     }
   }
 
@@ -32,6 +34,7 @@ function App() {
         {answers.map(answer => (
           <button key={answer} onClick={() => handleAnswerClicked(answer)}>{answer}</button>
         ))}
+        {isWrongSelection && <div className="wrong">Wrong Answer</div>}
       </div>
     </div>
   );
